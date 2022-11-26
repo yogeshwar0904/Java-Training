@@ -71,8 +71,10 @@ return null;
      *        password of the account
      * @return null if sucessfully deleted         
      */ 
-    public boolean deleteAccount(String accountName, String password) throws InstagramManagementException { 
+    public boolean deleteAccount(String accountName, 
+                         String password) throws InstagramManagementException { 
         User user = instagramDao.getAccountName(accountName);
+
         if (null != user && user.getPassword().equals(password)) {
             return instagramDao.deleteAccount(accountName, password);
         } else {
@@ -89,6 +91,7 @@ return null;
      */
     public User search(String accountName) throws InstagramManagementException  { 
         User user = instagramDao.getAccountName(accountName);
+
         if( null == user) {
             throw new InstagramManagementException(Constant.ERROR_01);
         } else {
@@ -105,6 +108,7 @@ return null;
      */
     public List<String> display() throws InstagramManagementException {
         List<String> accountNames = instagramDao.display(); 
+
         if(accountNames.isEmpty()) {
             throw new InstagramManagementException(Constant.ERROR_04);
         }  
@@ -121,9 +125,11 @@ return null;
      * @return User
      *         update the users account        
      */   
-    public User update(String accountName, String updateValue, int choice) throws InstagramManagementException {
+    public User update(String accountName, String updateValue,
+                           int choice) throws InstagramManagementException {
         User user = instagramDao.getAccountName(accountName);
         String userId = instagramDao.getUserId(accountName);
+
         if (null != user) {
             switch (choice) {
             case Constant.UPDATE_ACCOUNT_NAME:

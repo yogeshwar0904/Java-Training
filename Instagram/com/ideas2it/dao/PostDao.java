@@ -20,9 +20,8 @@ import com.ideas2it.model.Post;
  * @author     Yogeshwar
  */
 public class PostDao {
-
-    Connection connection;  
-    String query;    
+    private Connection connection;  
+    private String query;    
     PreparedStatement statement;
 
     /**
@@ -32,12 +31,12 @@ public class PostDao {
      * @return boolean true if post is uploaded
      */
     public Post uploadPost(User user, Post post) { 
-        int count =0;  
+        int count = 0;  
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ")
              .append("post(user_id, post_id, content, title) ")
              .append("VALUES(?,?,?,?)");
-            System.out.println("query "+query);
+        System.out.println("query " + query);
 
         try {     
             connection = DatabaseConnection.getConnection();
@@ -49,9 +48,10 @@ public class PostDao {
             count = statement.executeUpdate(); 
             statement.close();
             if(count>0) {
-return post;
-              } else {
-return null;}
+                return post;
+            } else {
+                return null;
+            }
         } catch (SQLException sqlException) {
             CustomLogger.error(sqlException.getMessage());
         } finally {
@@ -60,13 +60,14 @@ return null;}
         return post;
     }
 
-   public List<Post> displayPost(User user) {
-   List<Post> posts = new ArrayList();
+    public List<Post> displayPost(User user) {
+        List<Post> posts = new ArrayList();
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM post")
              .append(" WHERE user_id = ?");
-         ResultSet resultSet;
-         System.out.println(query);
+        ResultSet resultSet;
+        Post post;
+        System.out.println(query);
         
         try {
             connection = DatabaseConnection.getConnection();
@@ -74,9 +75,9 @@ return null;}
             statement.setString(1,user.getUserId());
             resultSet = statement.executeQuery();            
             while (resultSet.next()){
-                Post post = new Post();
-                             post.setPostId(resultSet.getString("post_id"));
-                                   post.setContent(resultSet.getString("content"));
+                post = new Post();
+                post.setPostId(resultSet.getString("post_id"));
+                post.setContent(resultSet.getString("content"));
                                    post.setTitle(resultSet.getString("title"));
                 posts.add(post);               
             } 
@@ -91,9 +92,14 @@ return null;}
 
     public int delete(String postId) { 
         int noOfRowsDeleted = 0;
+        System.out.println(postId);
+        StringBuilder query = new StringBuilder();
+        query.append("DELETE FROM post")
+             .append(" WHERE post_id = ?");
+        System.out.println(query);
         try {
             connection = DatabaseConnection.getConnection();            
-            statement = connection.prepareStatement("DELETE FROM post WHERE post_id = ?");
+            statement = connection.prepareStatement(query.toString());
             statement.setString(1, postId);
             noOfRowsDeleted = statement.executeUpdate();
             statement.close();
@@ -104,4 +110,38 @@ return null;}
         }
         return noOfRowsDeleted;
     } 
+
+    /**
+     * update the user
+     *
+     * @param accountName
+     *        account name of user
+     * @param updatevalue
+     *        update detail of user
+     * @param choice
+     *        choice of user
+     * @return Map<String, User>
+     *         account of user 
+     */   
+    public Post update (String postId, Post post, String userId) {
+        try {
+            connection = DatabaseConnection.getConnection();
+            StringBuilder query = new StringBuilder();
+            query.append("UPDATE post SET content = ?, title = ?")
+                 .append("WHERE post_id = ?");
+            statement = connection.prepareStatement(query.toString());
+            statement.setString(1,post.getContent())
+                     .setString(2,post.getTitle())
+                     .setString(3,post.getPostId());
+                     //.setString(4,post.getUserId());
+            statement.execute();
+            statement.close();
+        } catch(SQLException exception) {
+            CustomLogger.error("SQL exception occure");
+            exception.printStackTrace(); 
+        } finally {
+            DatabaseConnection.closeConnection();
+        }
+        return post;   
+    }
 }

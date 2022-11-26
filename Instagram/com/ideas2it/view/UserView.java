@@ -32,19 +32,20 @@ public class UserView {
     /**
      * Login the user 
      */
-     public void login(){
-	String accountName;
+    public void login() {
+        String accountName;
  	String password;	    
-         System.out.println("Enter userName");
-         accountName = scanner.nextLine();
-         System.out.println("Enter the password");
-         password = scanner.nextLine();
-         User user = instagramController.login(accountName, password);
-         if (null == user) {
-             System.out.println("No Account found");
-             userInput();
-         } else {
-             System.out.println(user);
+        System.out.println("Enter account name");
+        accountName = scanner.nextLine();
+        System.out.println("Enter the password");
+        password = scanner.nextLine();
+        User user = instagramController.login(accountName, password);
+
+        if (null == user) {
+            System.out.println("No Account found");
+            userInput();
+        } else {
+            System.out.println(user);
             postView.postMenu(user);
          }
      }
@@ -90,9 +91,9 @@ public class UserView {
                 case Constant.SEARCH:
                     search();
                     break;
-               case 6:
-                  login();
-                  break;
+                case 6:
+                    login();
+                    break;
 
                 default:
                     CustomLogger.warn("Entered value is Invalid!!");
@@ -207,6 +208,7 @@ public class UserView {
     private String getPassword() {
         String password; 
         boolean isValid = false;
+        
         do {
             System.out.println("Create the Password");
             password = scanner.next();
@@ -268,6 +270,7 @@ public class UserView {
         System.out.println("enter account name to update");
         String accountName = scanner.next();
         User user = null  ; 
+
         try {
             userControl.append(" Enter 1 for update account name")
                        .append("\n Enter 2 for update user name")

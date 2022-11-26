@@ -32,9 +32,9 @@ public class PostController {
      * @param String postLocation
      *        location of post taken
      */
-    public Post uploadPost(User user,String title,String content)   {
+    public Post uploadPost(User user, String title, String content)   {
         try {
-            return postService.uploadPost(user,title,content);
+            return postService.uploadPost(user, title, content);
         } catch (InstagramManagementException exception) {
             CustomLogger.error(exception.getMessage());
         }
@@ -50,7 +50,9 @@ public class PostController {
      *         posts of the user
      */
     public List<Post> getUserPost(User user) {
-        List<Post> posts = null; 
+        List<Post> posts;
+        posts = null; 
+
         try {
             posts = postService.displayPost(user);
         } catch (InstagramManagementException exception) {
@@ -69,10 +71,34 @@ public class PostController {
      */
     public boolean delete(String postId) {
         try {
+	    System.out.println(postId);
             return postService.delete(postId);
         } catch (InstagramManagementException exception) {
             CustomLogger.error(exception.getMessage());
         }
         return false;
     }
+
+
+    /**
+     * update the user
+     *
+     * @param string accountName
+     *        account name of user
+     * @param string updateValue
+     *        change detail  of user
+     * @param int choice
+     *        choice of user
+     * @return user
+     *         details of user
+     *          
+     */   
+    public Post update(String postId, String updateValue, int choice) { 
+        try {
+            return postService.update(postId, updateValue, choice); 
+        } catch (InstagramManagementException exception) {
+            CustomLogger.error(exception.getMessage());
+        } 
+        return null; 
+    } 
 }

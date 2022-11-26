@@ -51,3 +51,10 @@
 2022-11-25 19:05:07,963 ERROR c.i.l.CustomLogger [main] No account exist to delete
 2022-11-25 19:18:19,755 ERROR c.i.l.CustomLogger [main] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= '1cbd4fe7-46c7-46e0-af05-4035aae73e13'' at line 1
 2022-11-25 19:18:19,755 ERROR c.i.l.CustomLogger [main] No account exist to delete
+2022-11-26 14:37:33,402 ERROR c.i.l.CustomLogger [main] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* FROM post WHERE post_id = '48e48928-d582-4027-b30c-602ad0fa57a3'' at line 1
+2022-11-26 14:45:38,632 ERROR c.i.l.CustomLogger [main] No account exist to delete
+2022-11-26 15:15:58,595 ERROR c.i.l.CustomLogger [main] No user exist
+2022-11-26 15:17:29,303 ERROR c.i.l.CustomLogger [main] No user exist
+2022-11-26 15:17:29,392 ERROR c.i.l.CustomLogger [main] No account found to update
+2022-11-26 16:02:55,431 ERROR c.i.l.CustomLogger [main] No user exist
+2022-11-26 16:10:21,049 ERROR c.i.l.CustomLogger [main] No user exist

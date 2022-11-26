@@ -44,7 +44,7 @@ public class InstagramDao {
             statement.setString(3, user.getUserName());
             statement.setLong(4, user.getMobileNumber());
             statement.setString(5, user.getPassword());
-            statement.execute();
+            statement.execute(); 
             statement.close();
         } catch (SQLException exception) {
            exception.printStackTrace();
@@ -66,6 +66,7 @@ public class InstagramDao {
     public User getAccountName(String accountName) {
         ResultSet resultset;
         User user = null;
+
         try {
             connection = DatabaseConnection.getConnection();
             query = "SELECT * From user WHERE account_name = ? and delete_count = 0";
@@ -175,7 +176,7 @@ public class InstagramDao {
      * @return Map<String, User>
      *         account of user 
      */   
-    public User update(String accountName, User user,String userId) {
+    public User update(String accountName, User user, String userId) {
         try {
             connection = DatabaseConnection.getConnection();
             StringBuilder query = new StringBuilder();
@@ -189,7 +190,8 @@ public class InstagramDao {
             statement.setString(4,user.getPassword());
             statement.setString(5,user.getUserId());
             statement.execute();
-            /*if (resultset.next()) {
+
+             /*if (resultset.next()) {
                 user.setUserId(resultset.getString("user_id"));
                 user.setAccountName(resultset.getString("account_name"));
                 user.setUserName(resultset.getString("user_name"));

@@ -7,9 +7,9 @@ import java.util.UUID;
 import com.ideas2it.constant.Constant;
 import com.ideas2it.dao.PostDao;
 import com.ideas2it.exception.InstagramManagementException;
-import com.ideas2it.service.InstagramService;
 import com.ideas2it.model.Post;
 import com.ideas2it.model.User;
+import com.ideas2it.service.InstagramService;
 
 /**
  * perform the upload, delete, display 
@@ -35,9 +35,12 @@ public class PostService {
      * @param string postLocation
      *        location of post taken
      */
-    public Post uploadPost(User user, String title, String content) throws InstagramManagementException {
-        String postId = UUID.randomUUID().toString();
-        Post post = new Post(postId, title, content);
+    public Post uploadPost(User user, String title, String content) 
+                    throws InstagramManagementException {
+        String postId;
+        Post post;
+        postId = UUID.randomUUID().toString();
+        post = new Post(postId, title, content);
         return postDao.uploadPost(user, post);
     }
 
@@ -51,7 +54,9 @@ public class PostService {
      *         true or false based on the response
      */
     public boolean delete(String postId) throws InstagramManagementException { 
-        boolean isDeleted = (postDao.delete(postId) > 0) ? true :false;
+        System.out.println(postId);
+        boolean isDeleted;
+        isDeleted = (postDao.delete(postId) > 0);
         return isDeleted;
     }
 
@@ -61,13 +66,47 @@ public class PostService {
      * @param  userId   - id of the user
      * @return userPosts - posts of the particular user
      */
-    public List<Post> displayPost(User user) throws InstagramManagementException {
+    public List<Post> displayPost(User user) 
+                      throws InstagramManagementException {
         List<Post> userPosts;
         userPosts = postDao.displayPost(user);
         
         if (userPosts.isEmpty()) {
-            throw new InstagramManagementException(Constant.ERROR_03);
+            throw new InstagramManagementException(Constant.ERROR_001);
         }      
         return userPosts;
     } 
+
+    /**
+     * update the user post
+     *
+     * @param String postId 
+     *        post id  of the user
+     * @param int choice
+     *        choice of the user
+     * @return Post
+     *         update the users post        
+     */   
+    public Post update(String postId, String updateValue,
+                           int choice) throws InstagramManagementException {
+        Post post = postDao.getPostId(postId);
+        String userId = postDao.getUserId(postId);
+
+        if (null != post) {
+            switch (choice) {
+            case Constant.UPDATE_POST_CONTENT:
+                user.setContent(updateValue); 
+                break;
+
+            case Constant.UPDATE_POST_TITLE:
+                user.setTitle(updateValue);
+                break;
+
+            default:
+                break;         
+            }
+            return postDao.update(postId, post, userId);
+        }
+        throw new InstagramManagementException(Constant.ERROR_002);
+    }
 }

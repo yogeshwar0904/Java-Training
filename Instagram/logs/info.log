@@ -73,3 +73,7 @@
 2022-11-09 15:52:22,921 INFO c.i.l.CustomLogger [main] No account found
 2022-11-09 17:12:36,563 INFO c.i.l.CustomLogger [main] account not updated
 2022-11-09 17:15:44,843 INFO c.i.l.CustomLogger [main] account updated Successfully
+2022-11-26 15:15:58,730 INFO c.i.l.CustomLogger [main] account not updated
+2022-11-26 16:03:46,706 INFO c.i.l.CustomLogger [main] Account created sucessfully
+2022-11-26 16:18:03,024 INFO c.i.l.CustomLogger [main] Account created sucessfully
+2022-11-26 16:19:44,045 INFO c.i.l.CustomLogger [main] account updated Successfully

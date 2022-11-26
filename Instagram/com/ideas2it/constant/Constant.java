@@ -30,8 +30,11 @@ public class Constant {
 
     public static final int ADD_POST = 1;
     public static final int DISPLAY_POST = 2;
-    public static final int LIKE_POST = 3;
-    public static final int REMOVE_POST = 4;
+    public static final int  REMOVE_POST = 3;
+    public static final int  UPDATE_POST = 4;
+
+    public static final int UPDATE_POST_CONTENT = 1;  
+    public static final int UPDATE_POST_TITLE = 2; 
 
     public static final String ERROR_01 = "No user exist";
     public static final String ERROR_02 = "No account found to update";
@@ -39,5 +42,6 @@ public class Constant {
     public static final String ERROR_04 = "No account found";
 
     public static final String ERROR_001 = "No post to display";
-    public static final String ERROR_002 = "No post exist to delete";
+    public static final String ERROR_002 = "No post exist to update";
+    public static final String ERROR_003 = "No post found to display";
 }
